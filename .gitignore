@@ -1,0 +1,6 @@
+*.pyc
+.cache
+.idea
+.pytest_cache
+/test/.pytest_cache
+config.ini
