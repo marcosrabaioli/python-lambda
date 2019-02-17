@@ -44,40 +44,16 @@ class ProductClickLambda(RestService):
 
         return self.responseForCreate(productClick)
 
-    def get(self, object):
-        pass
+    def get(self, keys):
+        productClickfacade = ProductClickEventFacade()
+        try:
+            productClick = productClickfacade.get(keys)
+        except Exception as err:
+            return self.responseForError(err)
+        return self.responseForOK(productClick)
 
     def delete(self, object):
         pass
 
     def put(self, object):
         pass
-
-
-if __name__ == '__main__':
-
-    json = '''{
-       "event":"productClick",
-        "user":{
-            "id":"user.id"
-        },
-        "actionField":  "Search Results",
-        "timestamp": 21212121212,
-        "products":[
-                {
-                   "name":"productObj.name",
-                   "id":"productObj.id",
-                   "price":20,
-                   "brand":"productObj.brand",
-                   "category":"productObj.cat",
-                   "variant":"productObj.variant",
-                   "position": 1
-                }
-             ]
-          }'''
-    facade = ProductClickEventFacade()
-    click = facade.jsonToObject(json)
-
-    string = facade.objectToJson(click)
-    print(click)
-    print(string)

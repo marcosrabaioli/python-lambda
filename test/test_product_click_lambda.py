@@ -12,14 +12,14 @@ class TestProductClickLambda(object):
                            "id": "1",
                            "event":"productClick",
                             "user":{
-                                "id":"user.id"
+                                "id":"1"
                             },
                             "actionField":  "Search Results",
                             "timestamp": 21212121212,
                             "products":[
                                     {
                                        "name":"productObj.name",
-                                       "id":"productObj.id",
+                                       "id":"1",
                                        "price":20,
                                        "brand":"productObj.brand",
                                        "category":"productObj.cat",
@@ -30,4 +30,16 @@ class TestProductClickLambda(object):
                               }'''
 
         res = self.clazz.lambda_handler(event, None)
+        assert res['statusCode'] == 201
+
+    def test_get(self):
+        event = dict()
+        event['httpMethod'] = "GET"
+        event['queryStringParameters'] = '{"id": "1"}'
+
+        res = self.clazz.lambda_handler(event, None)
         assert res['statusCode'] == 200
+
+
+t = TestProductClickLambda()
+t.test_get()

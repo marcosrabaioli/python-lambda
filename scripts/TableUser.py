@@ -1,6 +1,6 @@
 import boto3
 from configparser import ConfigParser
-from schema.ProductClickEventSchema import ProductClickEventSchema
+from schema.UserSchema import UserSchema
 
 config = ConfigParser()
 config.read('../config.ini')
@@ -13,7 +13,7 @@ acceskey = config.get('DYNAMODB', 'accesskey')
 secretkey = config.get('DYNAMODB', 'secretkey')
 
 dynamodb = boto3.resource('dynamodb', region_name=region, endpoint_url=url, aws_access_key_id=acceskey, aws_secret_access_key=secretkey)
-table = ProductClickEventSchema().table
+table = UserSchema().table
 
 if environment:
     table = table + '_' + environment

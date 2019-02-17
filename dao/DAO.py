@@ -1,5 +1,6 @@
 import boto3
 from configparser import ConfigParser
+import json
 
 class DAO(object):
 
@@ -33,5 +34,10 @@ class DAO(object):
     def delete(self, object):
         self.table.delete_item(object)
 
-    def get(self, object):
-        self.table.scan(object)
+    def get(self, keys):
+        if type(keys) is not dict:
+            keys = json.loads(keys)
+        response = self.table.get_item(Key= keys)
+        item = response['Item']
+        return self.schema.make_object(item)
+

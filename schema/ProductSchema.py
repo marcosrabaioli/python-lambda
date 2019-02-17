@@ -16,4 +16,7 @@ class ProductSchema(Schema):
         def make_object(self, data):
             return Product(**data)
 
+        @property
+        def table(self):
+            return 'Product'
 

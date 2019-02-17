@@ -8,3 +8,7 @@ class UserSchema(Schema):
     @post_load
     def make_object(self, data):
         return User(**data)
+
+    @property
+    def table(self):
+        return 'User'
