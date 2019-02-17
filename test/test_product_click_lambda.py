@@ -41,5 +41,3 @@ class TestProductClickLambda(object):
         assert res['statusCode'] == 200
 
 
-t = TestProductClickLambda()
-t.test_get()

@@ -17,6 +17,8 @@ class ProductClickEventSchema(Schema):
     def make_object(self, data):
         return ProductClickEvent(**data)
 
+
+
     @property
     def table(self):
         return'ProductClickEvent'

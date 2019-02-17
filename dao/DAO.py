@@ -2,6 +2,7 @@ import boto3
 from configparser import ConfigParser
 import json
 
+
 class DAO(object):
 
     def __init__(self, schema):
@@ -25,8 +26,12 @@ class DAO(object):
 
     def create(self,object):
         if type(object) is not dict:
-            return self.table.put_item(Item=self.schema.dump(object))
-        return self.table.put_item(Item=object)
+            object = self.schema.dump(object)
+
+        resp = self.table.put_item(Item=object)
+        if resp['ResponseMetadata']['HTTPStatusCode'] == 200:
+            return object
+        raise Exception
 
     def update(self, object):
         self.table.update_item(object)
