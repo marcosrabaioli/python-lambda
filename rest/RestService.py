@@ -10,7 +10,7 @@ class RestService:
     def _respond(err=None, statusCode=200, body=None):
         return {
             'statusCode': statusCode,
-            'body': err if err else json.dumps(body, cls=DecimalEncoder),
+            'body': err if err else json.dumps(body),
             'headers': {
                 'Content-Type': 'application/json',
             },

@@ -37,12 +37,11 @@ class ProductClickLambda(RestService):
         productClickfacade = ProductClickEventFacade()
 
         try:
-            productClick = productClickfacade.jsonToObject(payload)
-            productClick = productClickfacade.create(productClick)
+            productClick = productClickfacade.create(payload)
         except Exception as err:
             return self.responseForError(err)
 
-        return self.responseForCreate(productClick)
+        return self.responseForCreate(productClickfacade.objectToJson(productClick))
 
     def get(self, keys):
         productClickfacade = ProductClickEventFacade()
@@ -50,7 +49,7 @@ class ProductClickLambda(RestService):
             productClick = productClickfacade.get(keys)
         except Exception as err:
             return self.responseForError(err)
-        return self.responseForOK(productClick)
+        return self.responseForOK(productClickfacade.objectToJson(productClick))
 
     def delete(self, object):
         pass
