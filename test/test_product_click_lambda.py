@@ -39,3 +39,7 @@ class TestProductClickLambda(object):
 
         res = self.clazz.lambda_handler(event, None)
         assert res['statusCode'] == 200
+
+
+t = TestProductClickLambda()
+t.test_get()

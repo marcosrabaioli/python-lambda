@@ -2,6 +2,7 @@ import json
 from dao.DAO import DAO
 from utils.JsonEncoder import DecimalEncoder
 
+
 class Facade(DAO):
 
     def __init__(self, schema):
@@ -36,10 +37,7 @@ class Facade(DAO):
     def delete(self, object):
         return super().delete()
 
-    #TODO resolver essa gambiarra na load de um objeto aninhado
     def get(self, keys):
-        obj = super().get(keys)
-        obj = self.objectToJson(obj)
-        obj = self.jsonToObject(obj)
-        return obj
+        item = super().get(keys)
+        return item
 
