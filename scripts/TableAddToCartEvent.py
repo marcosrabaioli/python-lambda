@@ -1,6 +1,6 @@
 import boto3
 from configparser import ConfigParser
-from schema.ProductSchema import ProductSchema
+from schema.AddToCartEventSchema import AddToCartEventSchema
 
 config = ConfigParser()
 config.read('../config.ini')
@@ -13,7 +13,7 @@ acceskey = config.get('DYNAMODB', 'accesskey')
 secretkey = config.get('DYNAMODB', 'secretkey')
 
 dynamodb = boto3.resource('dynamodb', region_name=region, endpoint_url=url, aws_access_key_id=acceskey, aws_secret_access_key=secretkey)
-table = ProductSchema().table
+table = AddToCartEventSchema().table
 
 if environment:
     table = table + '_' + environment
@@ -39,9 +39,6 @@ table = dynamodb.create_table(
         'WriteCapacityUnits': 5
     }
 )
-
-# Wait until the table exists.
-#table.meta.client.get_waiter('table_exists').wait(TableName=table)
 
 # Print out some data about the table.
 print(table.item_count)

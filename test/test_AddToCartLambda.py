@@ -1,20 +1,19 @@
-from rest.ProductcClickLambda import ProductClickLambda
+from rest.AddToCartLambda import AddToCartLambda
 
 
-class TestProductClickLambda(object):
+class TestAddToCartLambda(object):
 
-    clazz = ProductClickLambda()
+    clazz = AddToCartLambda()
 
     def test_post(self):
         event = dict()
         event['httpMethod'] = "POST"
         event['body'] = '''{
                            "id": "1",
-                           "event":"productClick",
+                           "event":"addToCart",
                             "user":{
                                 "id":"1"
                             },
-                            "actionField":  "Search Results",
                             "timestamp": 21212121212,
                             "products":[
                                     {

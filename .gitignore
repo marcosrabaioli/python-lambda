@@ -2,5 +2,6 @@
 .cache
 .idea
 .pytest_cache
+.coverage
 /test/.pytest_cache
 config.ini

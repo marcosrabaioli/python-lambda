@@ -1,6 +1,6 @@
 class Product(object):
 
-    def __init__(self, name, price, brand, category, variant, position, id=None):
+    def __init__(self, name, price, brand, category, variant, position,quantity=None, id=None):
         self.name = name
         self.id = id
         self.price = price
@@ -8,6 +8,7 @@ class Product(object):
         self.category = category
         self.variant = variant
         self.position = position
+        self.quantity = quantity
 
 
 

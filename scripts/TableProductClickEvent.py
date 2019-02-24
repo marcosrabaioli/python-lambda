@@ -41,7 +41,7 @@ table = dynamodb.create_table(
 )
 
 # Wait until the table exists.
-table.meta.client.get_waiter('table_exists').wait(TableName=table)
+#table.meta.client.get_waiter('table_exists').wait(TableName=table)
 
 # Print out some data about the table.
 print(table.item_count)

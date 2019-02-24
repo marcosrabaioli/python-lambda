@@ -11,6 +11,7 @@ class ProductSchema(Schema):
         category = fields.Str()
         variant = fields.Str()
         position = fields.Integer()
+        quantity = fields.Integer()
 
         @post_load
         def make_object(self, data):
