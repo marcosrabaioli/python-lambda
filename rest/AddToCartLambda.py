@@ -1,7 +1,7 @@
 import json
-
 from facade.AddToCartEventFacade import AddToCartEventFacade
 from rest.RestService import RestService
+from utils.Logger import Logger
 
 
 class AddToCartLambda(RestService):
@@ -20,6 +20,7 @@ class AddToCartLambda(RestService):
             payload = event['queryStringParameters'] if operation == 'GET' else json.loads(event['body'])
             return operations[operation](payload)
         else:
+            Logger.error(ValueError('Unsupported method "{}"'.format(operation)))
             return self.responseForError((ValueError('Unsupported method "{}"'.format(operation))))
 
     def post(self, payload):
@@ -29,6 +30,7 @@ class AddToCartLambda(RestService):
         try:
             addToCart = addToCartEventFacade.create(payload)
         except Exception as err:
+            Logger.error(err)
             return self.responseForError(err)
 
         return self.responseForCreate(addToCartEventFacade.objectToJson(addToCart))
@@ -38,6 +40,7 @@ class AddToCartLambda(RestService):
         try:
             addToCart = addToCartEventFacade.get(keys)
         except Exception as err:
+            Logger.error(err)
             return self.responseForError(err)
         return self.responseForOK(addToCartEventFacade.objectToJson(addToCart))
 
